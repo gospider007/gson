@@ -3,6 +3,7 @@ module gitee.com/baixudong/gson
 go 1.21.1
 
 require (
+	gitee.com/baixudong/kinds v0.0.0-20230809033013-c3d6d3479f8c
 	gitee.com/baixudong/tools v0.0.0-20230926010219-77f29cbf5935
 	github.com/json-iterator/go v1.1.12
 	github.com/tidwall/gjson v1.17.0
@@ -10,7 +11,6 @@ require (
 )
 
 require (
-	gitee.com/baixudong/kinds v0.0.0-20230809033013-c3d6d3479f8c // indirect
 	gitee.com/baixudong/re v0.0.0-20230809033040-360c1d945e59 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
