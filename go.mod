@@ -1,4 +1,4 @@
-module gitee.com/baixudong/bson
+module gitee.com/baixudong/gson
 
 go 1.21.1
 

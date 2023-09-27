@@ -1,4 +1,4 @@
-package bson
+package gson
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"gitee.com/baixudong/tools"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tidwall/gjson"
-	bbson "go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 var jsonConfig = jsoniter.Config{
@@ -73,7 +73,7 @@ func (obj *Client) MarshalJSON() ([]byte, error) {
 	return Encode(obj.g.Value())
 }
 func (obj *Client) MarshalBSON() ([]byte, error) {
-	return bbson.Marshal(obj.g.Value())
+	return bson.Marshal(obj.g.Value())
 }
 func Encode(data any) ([]byte, error) {
 	return jsonConfig.Marshal(data)
