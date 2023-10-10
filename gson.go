@@ -10,7 +10,6 @@ import (
 )
 
 var jsonConfig = jsoniter.Config{
-	EscapeHTML:    true,
 	CaseSensitive: true,
 }.Froze()
 
@@ -40,7 +39,7 @@ func (obj *Client) String() string {
 	return obj.g.String()
 }
 func (obj *Client) Bytes() []byte {
-	return tools.StringToBytes(obj.g.Raw)
+	return tools.StringToBytes(obj.String())
 }
 func (obj *Client) Int() int64 {
 	return obj.g.Int()
