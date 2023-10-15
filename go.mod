@@ -1,4 +1,4 @@
-module gitee.com/baixudong/gson
+module github.com/gospider007/gson
 
 go 1.21.1
 
