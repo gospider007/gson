@@ -3,7 +3,7 @@ package gson
 import (
 	"errors"
 
-	"gitee.com/baixudong/tools"
+	"github.com/gospider007/tools"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tidwall/gjson"
 	"go.mongodb.org/mongo-driver/bson"

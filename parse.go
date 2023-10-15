@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"gitee.com/baixudong/kinds"
+	"github.com/gospider007/kinds"
 )
 
 // 解析json 中的列表
