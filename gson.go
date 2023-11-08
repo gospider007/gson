@@ -66,7 +66,43 @@ func (obj *Client) Uint() uint64 {
 	return obj.g.Uint()
 }
 func (obj *Client) Get(path string) *Client {
+	g := obj.g.Get(path)
+	if !g.Exists() {
+		return nil
+	}
 	return &Client{g: obj.g.Get(path)}
+}
+func (obj *Client) Find(path string) (result *Client) {
+	if result = obj.Get(path); result != nil {
+		return result
+	}
+	obj.ForEach(func(key, value *Client) bool {
+		if value.IsObject() || value.IsArray() {
+			if result = value.Find(path); result != nil {
+				return false
+			}
+		}
+		return true
+	})
+	return
+}
+func (obj *Client) Finds(path string) []*Client {
+	results := []*Client{}
+	if result := obj.Get(path); result != nil {
+		results = append(results, result)
+	}
+	obj.ForEach(func(key, value *Client) bool {
+		if value.IsObject() || value.IsArray() {
+			results = append(results, value.Finds(path)...)
+		}
+		return true
+	})
+	return results
+}
+func (obj *Client) ForEach(iterator func(key, value *Client) bool) {
+	obj.g.ForEach(func(key, value gjson.Result) bool {
+		return iterator(&Client{g: key}, &Client{g: value})
+	})
 }
 func (obj *Client) MarshalJSON() ([]byte, error) {
 	return Encode(obj.g.Value())
