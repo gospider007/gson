@@ -4,7 +4,7 @@ go 1.21.3
 
 require (
 	github.com/gospider007/kinds v0.0.0-20231024093643-7a4424f2d30e
-	github.com/gospider007/tools v0.0.0-20231104124710-69ac32876ccc
+	github.com/gospider007/tools v0.0.0-20231110011734-c2a4739ea0a0
 	github.com/json-iterator/go v1.1.12
 	github.com/tidwall/gjson v1.17.0
 	go.mongodb.org/mongo-driver v1.13.0
@@ -20,6 +20,6 @@ require (
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
 	golang.org/x/image v0.14.0 // indirect
-	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/net v0.18.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )
