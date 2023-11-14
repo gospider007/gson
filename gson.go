@@ -119,31 +119,28 @@ func Decode(data any, strus ...any) (client *Client, err error) {
 	switch val := data.(type) {
 	case gjson.Result:
 		ga = val
+	case *Client:
+		ga = val.g
 	case []byte:
-		if len(strus) > 0 {
-			err = jsonConfig.Unmarshal(val, strus[0])
-		}
 		ga = gjson.ParseBytes(val)
 	case string:
-		if len(strus) > 0 {
-			err = jsonConfig.Unmarshal(tools.StringToBytes(val), strus[0])
-		}
 		ga = gjson.Parse(val)
 	default:
-		con, err := Encode(data)
-		if err != nil {
-			return nil, err
-		}
-		if len(strus) > 0 {
-			err = jsonConfig.Unmarshal(con, strus[0])
-		}
-		ga = gjson.ParseBytes(con)
-	}
-	if err == nil {
-		if !ga.IsObject() && !ga.IsArray() {
-			err = errors.New("不是一个json对象")
+		var con []byte
+		con, err = Encode(data)
+		if err == nil {
+			ga = gjson.ParseBytes(con)
 		}
 	}
 	client = &Client{g: ga}
+	if err != nil {
+		return
+	} else if !client.IsObject() && !client.IsArray() {
+		err = errors.New("不是一个json对象")
+		return
+	}
+	if len(strus) > 0 {
+		err = jsonConfig.Unmarshal(client.Bytes(), strus[0])
+	}
 	return
 }
