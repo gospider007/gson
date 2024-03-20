@@ -78,10 +78,7 @@ func (obj *Client) Get(path string) *Client {
 	return &Client{g: obj.g.Get(path)}
 }
 func (obj *Client) Find(path string) (result *Client) {
-	if result = obj.Get(path); result.Exists() {
-		return result
-	}
-	obj.ForEach(func(key, value *Client) bool {
+	obj.ForEach(func(value *Client) bool {
 		result = value.Get(path)
 		return !result.Exists()
 	})
@@ -89,10 +86,7 @@ func (obj *Client) Find(path string) (result *Client) {
 }
 func (obj *Client) Finds(path string) []*Client {
 	results := []*Client{}
-	if result := obj.Get(path); result.Exists() {
-		results = append(results, result)
-	}
-	obj.ForEach(func(key, value *Client) bool {
+	obj.ForEach(func(value *Client) bool {
 		if result := value.Get(path); result.Exists() {
 			results = append(results, result)
 		}
@@ -100,16 +94,33 @@ func (obj *Client) Finds(path string) []*Client {
 	})
 	return results
 }
-func (obj *Client) ForEach(iterator func(key, value *Client) bool) {
-	obj.g.ForEach(func(key, value gjson.Result) bool {
-		keyData := &Client{g: key}
-		valData := &Client{g: value}
-		resultData := iterator(keyData, valData)
-		if valData.IsArray() || valData.IsObject() {
-			valData.ForEach(iterator)
+func (obj *Client) ForEach(iterator func(value *Client) bool) bool {
+	if obj.IsArray() {
+		if !iterator(obj) {
+			return false
 		}
-		return resultData
-	})
+		for _, value := range obj.Array() {
+			if !iterator(value) {
+				return false
+			}
+			if !value.ForEach(iterator) {
+				return false
+			}
+		}
+	} else if obj.IsObject() {
+		if !iterator(obj) {
+			return false
+		}
+		for _, value := range obj.Map() {
+			if !iterator(value) {
+				return false
+			}
+			if !value.ForEach(iterator) {
+				return false
+			}
+		}
+	}
+	return true
 }
 func (obj *Client) MarshalJSON() ([]byte, error) {
 	return Encode(obj.g.Value())
