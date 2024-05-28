@@ -32,6 +32,14 @@ func (obj *Client) Map() map[string]*Client {
 	}
 	return result
 }
+func (obj *Client) RawMap() map[string]any {
+	result := map[string]any{}
+	for kk, vv := range obj.g.Map() {
+		result[kk] = vv.Value()
+	}
+	return result
+}
+
 func (obj *Client) Array() []*Client {
 	lls := obj.g.Array()
 	result := make([]*Client, len(lls))
