@@ -21,6 +21,7 @@ var jsonConfig = jsoniter.Config{
 type Client struct {
 	g gjson.Result
 }
+type Map map[string]*Client
 
 func NewEncoder(writer io.Writer) *jsoniter.Encoder {
 	return jsonConfig.NewEncoder(writer)
