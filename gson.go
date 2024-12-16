@@ -7,6 +7,7 @@ import (
 	"github.com/gospider007/tools"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tidwall/gjson"
+	"github.com/tidwall/sjson"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
@@ -82,9 +83,16 @@ func (obj *Client) Float() float64 {
 func (obj *Client) Uint() uint64 {
 	return obj.g.Uint()
 }
-
 func (obj *Client) Get(path string) *Client {
 	return &Client{g: obj.g.Get(path)}
+}
+func (obj *Client) Set(path string, value any) (err error) {
+	obj.g.Raw, err = sjson.Set(obj.g.Raw, path, value)
+	return
+}
+func (obj *Client) Delete(path string) (err error) {
+	obj.g.Raw, err = sjson.Delete(obj.g.Raw, path)
+	return
 }
 func (obj *Client) Find(path string) (result *Client) {
 	obj.ForEach(func(value *Client) bool {
