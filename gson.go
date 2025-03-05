@@ -146,6 +146,12 @@ func (obj *Client) MarshalBSON() ([]byte, error) {
 	return bson.Marshal(obj.g.Value())
 }
 func Encode(data any) ([]byte, error) {
+	switch value := data.(type) {
+	case string:
+		return tools.StringToBytes(value), nil
+	case []byte:
+		return value, nil
+	}
 	return jsonConfig.Marshal(data)
 }
 
