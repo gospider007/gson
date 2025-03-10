@@ -147,8 +147,6 @@ func (obj *Client) MarshalBSON() ([]byte, error) {
 }
 func Encode(data any) ([]byte, error) {
 	switch value := data.(type) {
-	case string:
-		return tools.StringToBytes(value), nil
 	case []byte:
 		return value, nil
 	}
