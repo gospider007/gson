@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/gospider007/kinds v0.0.0-20250217075226-10f199f7215d
-	github.com/gospider007/tools v0.0.0-20250627013901-3925ccd90381
+	github.com/gospider007/tools v0.0.0-20250711035142-241d6041da43
 	github.com/json-iterator/go v1.1.12
 	github.com/tidwall/gjson v1.18.0
 	github.com/tidwall/sjson v1.2.5
@@ -36,7 +36,7 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	go4.org v0.0.0-20230225012048-214862532bf5 // indirect
-	golang.org/x/image v0.28.0 // indirect
-	golang.org/x/net v0.41.0 // indirect
-	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/image v0.29.0 // indirect
+	golang.org/x/net v0.42.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 )
