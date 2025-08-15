@@ -1,6 +1,6 @@
 module github.com/gospider007/gson
 
-go 1.24.0
+go 1.25
 
 require (
 	github.com/gospider007/kinds v0.0.0-20250217075226-10f199f7215d
@@ -36,7 +36,7 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	go4.org v0.0.0-20230225012048-214862532bf5 // indirect
-	golang.org/x/image v0.29.0 // indirect
-	golang.org/x/net v0.42.0 // indirect
-	golang.org/x/text v0.27.0 // indirect
+	golang.org/x/image v0.30.0 // indirect
+	golang.org/x/net v0.43.0 // indirect
+	golang.org/x/text v0.28.0 // indirect
 )
