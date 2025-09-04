@@ -2,7 +2,6 @@ package gson
 
 import (
 	"errors"
-	"io"
 
 	"github.com/gospider007/tools"
 	jsoniter "github.com/json-iterator/go"
@@ -24,9 +23,6 @@ type Client struct {
 }
 type Map map[string]*Client
 
-func NewEncoder(writer io.Writer) *jsoniter.Encoder {
-	return jsonConfig.NewEncoder(writer)
-}
 func (obj *Client) Map() map[string]*Client {
 	result := map[string]*Client{}
 	for kk, vv := range obj.g.Map() {
