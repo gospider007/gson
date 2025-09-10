@@ -11,8 +11,7 @@ import (
 )
 
 var jsonConfig = jsoniter.Config{
-	CaseSensitive: true,
-
+	CaseSensitive:          true,
 	EscapeHTML:             false,
 	SortMapKeys:            true,
 	ValidateJsonRawMessage: true,
