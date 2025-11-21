@@ -1,8 +1,6 @@
 package gson
 
 import (
-	"errors"
-
 	"github.com/gospider007/tools"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tidwall/gjson"
@@ -171,7 +169,6 @@ func Decode(data any, strus ...any) (client *Client, err error) {
 	if err != nil {
 		return
 	} else if !client.IsObject() && !client.IsArray() {
-		err = errors.New("不是一个json对象")
 		return
 	}
 	if len(strus) > 0 {
