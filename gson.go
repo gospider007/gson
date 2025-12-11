@@ -138,6 +138,12 @@ func (obj *Client) MarshalJSON() ([]byte, error) {
 func (obj *Client) MarshalBSON() ([]byte, error) {
 	return bson.Marshal(obj.g.Value())
 }
+
+func (obj *Client) Decode(val any) error {
+	_, err := Decode(obj, val)
+	return err
+}
+
 func Encode(data any) ([]byte, error) {
 	switch value := data.(type) {
 	case []byte:
