@@ -74,3 +74,16 @@ func (obj *Client) parseLis() ([]*Client, bool) {
 	}
 	return lls, false
 }
+
+func ParseRawMap(value any) (map[string]any, error) {
+	switch t := value.(type) {
+	case map[string]any:
+		return t, nil
+	default:
+		d, err := Decode(value)
+		if err != nil {
+			return nil, err
+		}
+		return d.RawMap(), nil
+	}
+}
