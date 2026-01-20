@@ -1,6 +1,8 @@
 package gson
 
 import (
+	"strings"
+
 	"github.com/gospider007/tools"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/tidwall/gjson"
@@ -47,7 +49,21 @@ func (obj *Client) Value() any {
 	return obj.g.Value()
 }
 func (obj *Client) String() string {
-	return obj.g.String()
+	v := obj.g.String()
+	if obj.g.Type == gjson.String && strings.Contains(obj.g.Raw, `\`) {
+		var v2 string
+		if strings.HasPrefix(obj.g.Raw, `"`) && strings.HasSuffix(obj.g.Raw, `"`) {
+			v2 = strings.Trim(obj.g.Raw, `"`)
+		} else if strings.HasPrefix(obj.g.Raw, `'`) && strings.HasSuffix(obj.g.Raw, `'`) {
+			v2 = strings.Trim(obj.g.Raw, `'`)
+		} else {
+			v2 = obj.g.Raw
+		}
+		if strings.Contains(v2, v) && v != v2 {
+			return strings.ReplaceAll(v2, `\`, `、`)
+		}
+	}
+	return v
 }
 func (obj *Client) Bytes() []byte {
 	return tools.StringToBytes(obj.String())
